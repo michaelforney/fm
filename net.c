@@ -87,10 +87,9 @@ link(Net *net, Port a, Port b)
 		set(net, a, b);
 	if (b.kind >= PORT_PTR0)
 		set(net, b, a);
-	/* XXX: should we queue when the main port is connected to ERA? */
-	if (a.kind == PORT_PTR0 && (b.kind == PORT_PTR0 || b.kind == PORT_NUMB))
+	if (a.kind == PORT_PTR0 && b.kind <= PORT_PTR0)
 		queue(net, a.data);
-	else if (b.kind == PORT_PTR0 && a.kind == PORT_NUMB)
+	else if (b.kind == PORT_PTR0 && a.kind < PORT_PTR0)
 		queue(net, b.data);
 }
 
